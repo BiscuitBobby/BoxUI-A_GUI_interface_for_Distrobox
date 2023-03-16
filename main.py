@@ -8,7 +8,8 @@ class MainWidget(QtWidgets.QWidget):
         super().__init__()
 
         self.setStyleSheet("background-color: #212121")
-        layout = QtWidgets.QHBoxLayout(self)
+        main_layout = QtWidgets.QHBoxLayout(self)
+
         # Create a label with an image
         self.image_label = QtWidgets.QLabel(self)
         pixmap = QtGui.QPixmap("debian.png").scaled(250, 250, Qt.KeepAspectRatio, Qt.SmoothTransformation)
@@ -34,9 +35,16 @@ class MainWidget(QtWidgets.QWidget):
         right_layout.addWidget(self.info)
         for i in button_list:
             right_layout.addWidget(i)
+        left_layout = QtWidgets.QGridLayout()
 
         # Adding the layouts to main layout
-        layout.addLayout(right_layout)
+        main_layout.addStretch(1)
+        main_layout.addLayout(left_layout)
+        main_layout.addLayout(right_layout)
+        right_layout.addStretch(1)
+
+        # Set alignment of main layout to top center
+        main_layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
