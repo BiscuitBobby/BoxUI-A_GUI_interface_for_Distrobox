@@ -1,6 +1,19 @@
 import sys
 from PySide6 import QtWidgets, QtGui
 from PySide6.QtCore import Qt
+from Data.FetchData import *
+
+
+class button(QtWidgets.QPushButton):
+    def __init__(self, text):
+        super().__init__(text)
+        self.setFixedSize(250,250)
+        self.setStyleSheet("background-color: #999999; border-radius: 10px")
+
+        # Connect the clicked signal to a slot (function)
+        self.clicked.connect(lambda: print(text))
+
+
 
 
 class MainWidget(QtWidgets.QWidget):
@@ -25,6 +38,7 @@ class MainWidget(QtWidgets.QWidget):
 
         # set button labels
         self.start = QtWidgets.QPushButton("start distro")
+        self.start.clicked.connect(lambda: print(widget.size()))
         self.delete = QtWidgets.QPushButton("remove distro")
         self.open = QtWidgets.QPushButton("open in terminal")
         button_list = (self.start, self.delete, self.open)
@@ -35,16 +49,48 @@ class MainWidget(QtWidgets.QWidget):
         right_layout.addWidget(self.info)
         for i in button_list:
             right_layout.addWidget(i)
-        left_layout = QtWidgets.QGridLayout()
+        self.left_layout = QtWidgets.QGridLayout()
+        self.setMinimumSize(800, 600)
+        self.setBaseSize(1025, 800)
 
         # Adding the layouts to main layout
         main_layout.addStretch(1)
-        main_layout.addLayout(left_layout)
+        main_layout.addLayout(self.left_layout)
         main_layout.addLayout(right_layout)
         right_layout.addStretch(1)
+        self.left_layout.rowStretch(1)
 
         # Set alignment of main layout to top center
-        main_layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
+        right_layout.setAlignment(Qt.AlignTop | Qt.AlignRight)
+        self.left_layout.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        self.resizeEvent = self.onResize
+
+
+    def onResize(self, event):
+        lst = []
+        lnum = 0
+        wspace = int((self.width()-440)/250)
+        r = 1
+        c = 1
+        while self.left_layout.count():
+            item = self.left_layout.takeAt(0)
+            widget = item.widget()
+            if widget:
+                widget.deleteLater()
+            del item
+
+        for i in (dists):
+            lst.append(button(i))
+            #button(i).clicked.connect(lambda: self.image_label.setPixmap(icons((i.split(':'))[0])).scaled(250, 250, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            self.left_layout.addWidget(lst[lnum], r, c)
+            lnum += 1
+            if c < wspace:
+                c += 1
+            else:
+                r += 1
+
+        print(self.width(), self.height())
+        print('space=', wspace)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
