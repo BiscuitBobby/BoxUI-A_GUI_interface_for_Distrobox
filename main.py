@@ -2,22 +2,44 @@ import sys
 from PySide6 import QtWidgets, QtGui, QtCore
 from PySide6.QtCore import Qt
 from Data.FetchData import *
+icon_size = 200
 
 
 class button(QtWidgets.QPushButton):
-    def __init__(self, text):
+    def __init__(self, id):
         super().__init__()
-        self.setFixedSize(250, 250)
-        pixmap = QtGui.QPixmap(dists[text]["icon"])
-        self.setStyleSheet("background-color: #999999; border-radius: 10px")
+        self.setFixedSize(icon_size, icon_size)
+        self.setStyleSheet("background-color: #444654; border-radius: 10px")
+        pixmap = QtGui.QPixmap(dists[id]["icon"])
+        # Connect the clicked signal to a function
+        self.clicked.connect(lambda: self.updateDetails(pixmap, id))
 
-        # Connect the clicked signal to a slot (function)
-        self.clicked.connect(lambda: print(text))
+
+
         if pixmap:
             self.setIcon(pixmap)
-            self.setIconSize(QtCore.QSize(250, 250))
+            self.setIconSize(QtCore.QSize(icon_size, icon_size))
         else:
-            self.setText(text)
+            self.setText(id)
+
+    def updateDetails(self, pixmap, text):
+        global selected
+        if pixmap:
+            pixmap = pixmap.scaled(360, 360, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            image_label.setPixmap(pixmap)
+        else:
+            image_label.setText(text)
+        info.setText(f"name: {dists[text]['name']}\nstatus: {dists[text]['status']}\nid: {text}\n")
+        if not selected:
+            # set button labels
+            start = QtWidgets.QPushButton("start distro")
+            start.clicked.connect(lambda: print(widget.size()))
+            delete = QtWidgets.QPushButton("remove distro")
+            open = QtWidgets.QPushButton("open in terminal")
+            button_list = (start, delete, open)
+            for i in button_list:
+                details_layout.addWidget(i)
+            selected = True
 class ScrollArea(QtWidgets.QScrollArea):
     def __init__(self, layout):
         super().__init__()
@@ -29,6 +51,16 @@ class ScrollArea(QtWidgets.QScrollArea):
         layout.setAlignment(Qt.AlignLeft | Qt.AlignTop)
 
 
+def clearLayout(layout):
+    while layout.count():
+        item = layout.takeAt(0)
+        widget = item.widget()
+        if widget:
+            widget.deleteLater()
+        del item
+
+
+
 class MainWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
@@ -37,40 +69,29 @@ class MainWidget(QtWidgets.QWidget):
         main_layout = QtWidgets.QHBoxLayout(self)
 
         # Create a label with an image
-        self.image_label = QtWidgets.QLabel(self)
-        pixmap = QtGui.QPixmap("debian.png").scaled(250, 250, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-        self.image_label.setPixmap(pixmap)
+        pixmap = QtGui.QPixmap().scaled(icon_size, icon_size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        image_label.setPixmap(pixmap)
 
         # Set the fixed size and size policy
-        self.image_label.setMinimumSize(400, 300)
-        self.image_label.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        image_label.setMinimumSize(400, 300)
+        image_label.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
 
         # set text labels
-        self.info = QtWidgets.QLabel(self)
-        self.info.setText("name: distro_name\nstatus: status\nid: id\nimage: image")
-
-        # set button labels
-        self.start = QtWidgets.QPushButton("start distro")
-        self.start.clicked.connect(lambda: print(widget.size()))
-        self.delete = QtWidgets.QPushButton("remove distro")
-        self.open = QtWidgets.QPushButton("open in terminal")
-        button_list = (self.start, self.delete, self.open)
+        info.setText("")
 
         # Set the layouts and add the labels to it
-        details_layout = QtWidgets.QVBoxLayout()
         right_layout = QtWidgets.QWidget()
         right_layout.setStyleSheet("background-color: #444654")
         right_layout.setLayout(details_layout)
+        right_layout.setMaximumWidth(400)
 
-        details_layout.addWidget(self.image_label)
-        details_layout.addWidget(self.info)
-        for i in button_list:
-            details_layout.addWidget(i)
+        details_layout.addWidget(image_label)
+        details_layout.addWidget(info)
 
         self.left_layout = QtWidgets.QGridLayout()
         left_container = ScrollArea(self.left_layout)
-        self.setMinimumSize(1000, 600)
-        self.setBaseSize(1025, 800)
+        self.setMinimumSize(462+icon_size, 0)
+        self.resize(1210, 600)
 
         # Adding the layouts to main layout
         main_layout.addWidget(left_container)
@@ -82,37 +103,41 @@ class MainWidget(QtWidgets.QWidget):
         left_container.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         self.resizeEvent = self.onResize
 
-        right_layout.setMaximumWidth(400)
+
 
     def onResize(self, event):
-        lst = []
-        lnum = 0
-        wspace = int((self.width() - 440) / 250)
-        r = 1
-        c = 1
-        while self.left_layout.count():
-            item = self.left_layout.takeAt(0)
-            widget = item.widget()
-            if widget:
-                widget.deleteLater()
-            del item
+        lst, lnum = [], 0
+        wspace = int((self.width() - 440) / icon_size)
+        r, c = 0, 0
+        clearLayout(self.left_layout)
 
-        for i in (dists):
+        for i in dists:  # rearranges icons
             lst.append(button(i))
-            # button(i).clicked.connect(lambda: self.image_label.setPixmap(icons((i.split(':'))[0])).scaled(250, 250, Qt.KeepAspectRatio, Qt.SmoothTransformation))
             self.left_layout.addWidget(lst[lnum], r, c)
             lnum += 1
-            if c < wspace:
+            if c < (wspace-1):
                 c += 1
             else:
                 r += 1
+                c = 0
+        new_butt = QtWidgets.QPushButton("+")
+        new_butt.setFixedSize(icon_size, icon_size)
+        new_butt.setStyleSheet("background-color: #444654; border-radius: 10px")
+        new_butt.clicked.connect(lambda: print('new'))
+        self.left_layout.addWidget(new_butt, r, c)
 
-        print(self.width(), self.height())
-        print('space=', wspace)
+        '''print(self.width(), self.height())
+        print('space=', wspace)'''
+
+
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    image_label = QtWidgets.QLabel()
+    info = QtWidgets.QLabel()
+    details_layout = QtWidgets.QVBoxLayout()
     widget = MainWidget()
+
     widget.show()
     sys.exit(app.exec())

@@ -1,14 +1,16 @@
 import os
 import subprocess
 dists = dict()
+selected = False
 
 
-def update(name, status='Unknown'):
-    if name not in dists:
+def update(name, status='Unknown', id='Unknown'):
+    if id not in dists:
         icon = icons(name.split(':')[0])
-        dists[name] = {"icon": icon, "status": status}
-    else:
-        dists[name][status] = status
+        dists[id] = {"name": name,"icon": icon, "status": status, "id": id}
+        dists[id][status] = status
+        dists[id][name] = name
+        dists[id][id] = id
 
 
 def icons(name):
@@ -27,18 +29,22 @@ def icons(name):
     return None
 
 
-def DList():
+def DistroList():
+    global dists
+    dists = dict()
     process = subprocess.Popen(['distrobox', 'list'], stdout=subprocess.PIPE)
     output = process.stdout.readline().strip()
 
     while output:
         print(output)
         output = process.stdout.readline().strip().decode("utf-8")
+        x = output.split('|')  # splits ID, NAME, STATUS and IMAGE
 
-        name = (output.split('/')[-1])
+        name = (x[-1].split('/')[-1])
         if name != '':
-            status = ((output.split('|'))[2]).strip()
-            update(name, status)  # decode("utf-8") converts bytes to string
+            status = (x[2]).strip()
+            id = (x[0]).strip()
+            update(name, status, id)  # decode("utf-8") converts bytes to string
 
-DList()
+DistroList()
 print(dists)
