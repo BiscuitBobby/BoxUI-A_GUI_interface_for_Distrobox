@@ -4,10 +4,10 @@ dists = dict()
 selected = False
 
 
-def update(name, status='Unknown', id='Unknown'):
+def update(name, status='Unknown', id='Unknown', distro= "unknown"):
     if id not in dists:
-        icon = icons(name.split(':')[0])
-        dists[id] = {"name": name,"icon": icon, "status": status, "id": id}
+        icon = icons(distro.split(':')[0])
+        dists[id] = {"name": name,"icon": icon, "status": status, "id": id, "distro": distro}
         dists[id][status] = status
         dists[id][name] = name
         dists[id][id] = id
@@ -40,11 +40,12 @@ def DistroList():
         output = process.stdout.readline().strip().decode("utf-8")
         x = output.split('|')  # splits ID, NAME, STATUS and IMAGE
 
-        name = (x[-1].split('/')[-1])
-        if name != '':
+        distro = (x[-1].split('/')[-1])
+        if distro != '':
             status = (x[2]).strip()
             id = (x[0]).strip()
-            update(name, status, id)  # decode("utf-8") converts bytes to string
+            name = x[1]
+            update(name, status, id, distro)  # decode("utf-8") converts bytes to string
 
 DistroList()
 print(dists)

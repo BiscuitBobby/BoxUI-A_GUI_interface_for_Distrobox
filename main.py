@@ -2,7 +2,9 @@ import sys
 from PySide6 import QtWidgets, QtGui, QtCore
 from PySide6.QtCore import Qt
 from Data.FetchData import *
+from Data.processes import *
 icon_size = 200
+details_font_size = int(icon_size/13.333333333)
 
 
 class button(QtWidgets.QPushButton):
@@ -22,23 +24,31 @@ class button(QtWidgets.QPushButton):
         else:
             self.setText(id)
 
-    def updateDetails(self, pixmap, text):
+    def updateDetails(self, pixmap, id):
         global selected
         if pixmap:
-            pixmap = pixmap.scaled(360, 360, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            pixmap = pixmap.scaled(icon_size+140, icon_size+140, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             image_label.setPixmap(pixmap)
         else:
-            image_label.setText(text)
-        info.setText(f"name: {dists[text]['name']}\nstatus: {dists[text]['status']}\nid: {text}\n")
+            image_label.setText(dists["name"])
+        info.setText(f"Name: {dists[id]['name']}\nDistro:{dists[id]['distro']}\nStatus: {dists[id]['status']}\nID: {id}\n")
+        info.setFont(QtGui.QFont("Arial", details_font_size))
+        if "up" in dists[id]["status"].lower():
+            toggle = "stop "
+        else:
+            toggle = "start "
         if not selected:
             # set button labels
-            start = QtWidgets.QPushButton("start distro")
-            start.clicked.connect(lambda: print(widget.size()))
-            delete = QtWidgets.QPushButton("remove distro")
             open = QtWidgets.QPushButton("open in terminal")
-            button_list = (start, delete, open)
+            open.clicked.connect(lambda: enter_distro(dists[id]['name']))
+            start_stop = QtWidgets.QPushButton(toggle+"distro")
+            start_stop.clicked.connect(lambda: print(widget.size()))
+            delete = QtWidgets.QPushButton("remove distro")
+            delete.clicked.connect(lambda: remove_distro(dists[id]['name']))
+            button_list = (open, start_stop, delete)
             for i in button_list:
                 details_layout.addWidget(i)
+                i.setFont(QtGui.QFont("Arial", details_font_size))
             selected = True
 class ScrollArea(QtWidgets.QScrollArea):
     def __init__(self, layout):
@@ -73,7 +83,7 @@ class MainWidget(QtWidgets.QWidget):
         image_label.setPixmap(pixmap)
 
         # Set the fixed size and size policy
-        image_label.setMinimumSize(400, 300)
+        image_label.setMinimumSize(icon_size+160, 300)
         image_label.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
 
         # set text labels
@@ -83,14 +93,14 @@ class MainWidget(QtWidgets.QWidget):
         right_layout = QtWidgets.QWidget()
         right_layout.setStyleSheet("background-color: #444654")
         right_layout.setLayout(details_layout)
-        right_layout.setMaximumWidth(400)
+        right_layout.setMaximumWidth(icon_size+160)
 
         details_layout.addWidget(image_label)
         details_layout.addWidget(info)
 
         self.left_layout = QtWidgets.QGridLayout()
         left_container = ScrollArea(self.left_layout)
-        self.setMinimumSize(462+icon_size, 0)
+        self.setMinimumSize(462+icon_size, icon_size+412)
         self.resize(1210, 600)
 
         # Adding the layouts to main layout
@@ -123,6 +133,7 @@ class MainWidget(QtWidgets.QWidget):
         new_butt = QtWidgets.QPushButton("+")
         new_butt.setFixedSize(icon_size, icon_size)
         new_butt.setStyleSheet("background-color: #444654; border-radius: 10px")
+        new_butt.setFont(QtGui.QFont("Arial", 80, QtGui.QFont.Bold))
         new_butt.clicked.connect(lambda: print('new'))
         self.left_layout.addWidget(new_butt, r, c)
 
