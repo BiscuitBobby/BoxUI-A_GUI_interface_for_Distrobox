@@ -6,7 +6,7 @@ selected = False
 
 def update(name, status='Unknown', id='Unknown', distro= "unknown"):
     if id not in dists:
-        icon = icons(distro.split(':')[0])
+        icon = icons(distro.split(':')[0].split('-')[0])
         dists[id] = {"name": name,"icon": icon, "status": status, "id": id, "distro": distro}
         dists[id][status] = status
         dists[id][name] = name

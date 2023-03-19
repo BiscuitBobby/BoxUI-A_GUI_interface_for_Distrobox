@@ -12,6 +12,7 @@ class button(QtWidgets.QPushButton):
         super().__init__()
         self.setFixedSize(icon_size, icon_size)
         self.setStyleSheet("background-color: #444654; border-radius: 10px")
+        print('\n',id)
         pixmap = QtGui.QPixmap(dists[id]["icon"])
         # Connect the clicked signal to a function
         self.clicked.connect(lambda: self.updateDetails(pixmap, id))
@@ -33,18 +34,22 @@ class button(QtWidgets.QPushButton):
             image_label.setText(dists["name"])
         info.setText(f"Name: {dists[id]['name']}\nDistro:{dists[id]['distro']}\nStatus: {dists[id]['status']}\nID: {id}\n")
         info.setFont(QtGui.QFont("Arial", details_font_size))
+
+        name = dists[id]['name']
         if "up" in dists[id]["status"].lower():
-            toggle = "stop "
+            start_stop = QtWidgets.QPushButton("stop distro")
+            start_stop.clicked.connect(lambda: stop_distro(name))
         else:
-            toggle = "start "
+            start_stop = QtWidgets.QPushButton("start distro")
+            start_stop.clicked.connect(lambda: start_distro(name))
         if not selected:
             # set button labels
             open = QtWidgets.QPushButton("open in terminal")
-            open.clicked.connect(lambda: enter_distro(dists[id]['name']))
-            start_stop = QtWidgets.QPushButton(toggle+"distro")
-            start_stop.clicked.connect(lambda: print(widget.size()))
+            open.clicked.connect(lambda: enter_distro(name))
+
+
             delete = QtWidgets.QPushButton("remove distro")
-            delete.clicked.connect(lambda: remove_distro(dists[id]['name']))
+            delete.clicked.connect(lambda: remove_distro(name))
             button_list = (open, start_stop, delete)
             for i in button_list:
                 details_layout.addWidget(i)

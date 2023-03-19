@@ -1,5 +1,6 @@
 import subprocess
-from FetchData import DistroList
+from Data.FetchData import DistroList
+
 
 def get_default_terminal():
     try:
@@ -42,4 +43,8 @@ def remove_distro(name):
     subprocess.run(['distrobox', 'rm', name.strip()], input='y\n', text=True)
     DistroList()
 def stop_distro(name):
-    subprocess.run(['distrobox', 'stop', name.strip()])
+    subprocess.run(['distrobox', 'stop', name.strip()], input='y\n', text=True)
+    DistroList()
+def start_distro(name):
+    subprocess.run(['distrobox', 'enter', name.strip()])
+    DistroList()
