@@ -1,5 +1,4 @@
 import sys
-import time
 
 from PySide6 import QtWidgets, QtGui, QtCore
 from PySide6.QtCore import Qt
@@ -53,9 +52,12 @@ class button(QtWidgets.QPushButton):
     def update_info(self, id):
         global dists
         dists = DistroList()
-        info.setText(
-            f"Name: {dists[id]['name']}\nDistro:{dists[id]['distro']}\nStatus: {dists[id]['status']}\nID: {id}\n")
-        info.setFont(QtGui.QFont("Arial", details_font_size))
+        try:
+            info.setText(
+                f"Name: {dists[id]['name']}\nDistro:{dists[id]['distro']}\nStatus: {dists[id]['status']}\nID: {id}\n")
+            info.setFont(QtGui.QFont("Arial", details_font_size))
+        except:
+            info.setText("[Deleted]\n")
 
 class ScrollArea(QtWidgets.QScrollArea):
     def __init__(self, layout):
@@ -64,7 +66,6 @@ class ScrollArea(QtWidgets.QScrollArea):
         scroll_widget = QtWidgets.QWidget()
         scroll_widget.setLayout(layout)
         self.setWidget(scroll_widget)
-        #scroll_widget.setStyleSheet("background-color: #444654")
         layout.setAlignment(Qt.AlignLeft | Qt.AlignTop)
 
 
@@ -121,7 +122,6 @@ class MainWidget(QtWidgets.QWidget):
         self.resizeEvent = self.onResize
 
 
-
     def onResize(self, event):
         lst, lnum = [], 0
         wspace = int((self.width() - 440) / icon_size)
@@ -144,14 +144,10 @@ class MainWidget(QtWidgets.QWidget):
         new_butt.clicked.connect(lambda: print('new'))
         self.left_layout.addWidget(new_butt, r, c)
 
-        '''print(self.width(), self.height())
-        print('space=', wspace)'''
-
-
-
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+
     image_label = QtWidgets.QLabel()
     info = QtWidgets.QLabel()
     start = QtWidgets.QPushButton("stop distro")
@@ -159,7 +155,7 @@ if __name__ == "__main__":
     delete = QtWidgets.QPushButton("remove distro")
     button_list = (open, start, delete)
     details_layout = QtWidgets.QVBoxLayout()
-    widget = MainWidget()
 
+    widget = MainWidget()
     widget.show()
     sys.exit(app.exec())

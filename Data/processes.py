@@ -1,4 +1,5 @@
 import subprocess
+import time
 from Data.FetchData import DistroList
 import threading
 
@@ -39,9 +40,12 @@ print('\n', terminal)
 def enter_distro(name):
     terminal_thread = threading.Thread(target=lambda: subprocess.run([terminal, '-e', 'distrobox', 'enter', name.strip()]))
     terminal_thread.start()
+    time.sleep(1)
 
 
 def remove_distro(name):
+    global dists
     subprocess.run(['distrobox', 'rm', name.strip()], input='y\n', text=True)
+    dists = DistroList()
 def stop_distro(name, wait = 0):
     subprocess.run(['distrobox', 'stop', name.strip()], input='y\n', text=True)
