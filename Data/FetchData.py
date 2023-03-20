@@ -1,7 +1,6 @@
 import os
 import subprocess
 dists = dict()
-selected = False
 
 
 def update(name, status='Unknown', id='Unknown', distro= "unknown"):
@@ -46,6 +45,7 @@ def DistroList():
             id = (x[0]).strip()
             name = x[1]
             update(name, status, id, distro)  # decode("utf-8") converts bytes to string
+    return dists
 
 DistroList()
 print(dists)

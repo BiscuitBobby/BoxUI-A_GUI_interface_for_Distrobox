@@ -1,23 +1,24 @@
 import sys
+import time
+
 from PySide6 import QtWidgets, QtGui, QtCore
 from PySide6.QtCore import Qt
 from Data.FetchData import *
 from Data.processes import *
 icon_size = 200
 details_font_size = int(icon_size/13.333333333)
-
+thread = None
 
 class button(QtWidgets.QPushButton):
     def __init__(self, id):
         super().__init__()
+        self.id = id
         self.setFixedSize(icon_size, icon_size)
         self.setStyleSheet("background-color: #444654; border-radius: 10px")
-        print('\n',id)
+        print('\n', id)
         pixmap = QtGui.QPixmap(dists[id]["icon"])
         # Connect the clicked signal to a function
         self.clicked.connect(lambda: self.updateDetails(pixmap, id))
-
-
 
         if pixmap:
             self.setIcon(pixmap)
@@ -26,35 +27,36 @@ class button(QtWidgets.QPushButton):
             self.setText(id)
 
     def updateDetails(self, pixmap, id):
-        global selected
+        global button_list
+        print(f'\n\n{dists}')
         if pixmap:
             pixmap = pixmap.scaled(icon_size+140, icon_size+140, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             image_label.setPixmap(pixmap)
         else:
             image_label.setText(dists["name"])
-        info.setText(f"Name: {dists[id]['name']}\nDistro:{dists[id]['distro']}\nStatus: {dists[id]['status']}\nID: {id}\n")
+        self.update_info(id)
+        name = dists[id]['name']
+        for i in button_list:
+            i.deleteLater()
+        start = QtWidgets.QPushButton("stop distro")
+        open = QtWidgets.QPushButton("open in terminal")
+        delete = QtWidgets.QPushButton("remove distro")
+        button_list = (open, start, delete)
+
+        start.clicked.connect(lambda: stop_distro(name))
+        open.clicked.connect(lambda: enter_distro(name))  # Pass the name parameter to the clicked signal
+        delete.clicked.connect(lambda: remove_distro(name))
+        for i in button_list:
+            i.clicked.connect(lambda: self.update_info(id))
+            details_layout.addWidget(i)
+            i.setFont(QtGui.QFont("Arial", details_font_size))
+    def update_info(self, id):
+        global dists
+        dists = DistroList()
+        info.setText(
+            f"Name: {dists[id]['name']}\nDistro:{dists[id]['distro']}\nStatus: {dists[id]['status']}\nID: {id}\n")
         info.setFont(QtGui.QFont("Arial", details_font_size))
 
-        name = dists[id]['name']
-        if "up" in dists[id]["status"].lower():
-            start_stop = QtWidgets.QPushButton("stop distro")
-            start_stop.clicked.connect(lambda: stop_distro(name))
-        else:
-            start_stop = QtWidgets.QPushButton("start distro")
-            start_stop.clicked.connect(lambda: start_distro(name))
-        if not selected:
-            # set button labels
-            open = QtWidgets.QPushButton("open in terminal")
-            open.clicked.connect(lambda: enter_distro(name))
-
-
-            delete = QtWidgets.QPushButton("remove distro")
-            delete.clicked.connect(lambda: remove_distro(name))
-            button_list = (open, start_stop, delete)
-            for i in button_list:
-                details_layout.addWidget(i)
-                i.setFont(QtGui.QFont("Arial", details_font_size))
-            selected = True
 class ScrollArea(QtWidgets.QScrollArea):
     def __init__(self, layout):
         super().__init__()
@@ -152,6 +154,10 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     image_label = QtWidgets.QLabel()
     info = QtWidgets.QLabel()
+    start = QtWidgets.QPushButton("stop distro")
+    open = QtWidgets.QPushButton("open in terminal")
+    delete = QtWidgets.QPushButton("remove distro")
+    button_list = (open, start, delete)
     details_layout = QtWidgets.QVBoxLayout()
     widget = MainWidget()
 

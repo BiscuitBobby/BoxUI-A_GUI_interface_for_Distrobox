@@ -1,6 +1,6 @@
 import subprocess
 from Data.FetchData import DistroList
-
+import threading
 
 def get_default_terminal():
     try:
@@ -34,17 +34,14 @@ def get_default_terminal():
                 print("cannot find terminal\ndownload gnome shell?")
 
 terminal = get_default_terminal()
-print('\n',terminal)
+print('\n', terminal)
 
 def enter_distro(name):
-    subprocess.run([terminal, '-e', 'distrobox', 'enter', name.strip()])
+    terminal_thread = threading.Thread(target=lambda: subprocess.run([terminal, '-e', 'distrobox', 'enter', name.strip()]))
+    terminal_thread.start()
+
 
 def remove_distro(name):
     subprocess.run(['distrobox', 'rm', name.strip()], input='y\n', text=True)
-    DistroList()
-def stop_distro(name):
+def stop_distro(name, wait = 0):
     subprocess.run(['distrobox', 'stop', name.strip()], input='y\n', text=True)
-    DistroList()
-def start_distro(name):
-    subprocess.run(['distrobox', 'enter', name.strip()])
-    DistroList()
