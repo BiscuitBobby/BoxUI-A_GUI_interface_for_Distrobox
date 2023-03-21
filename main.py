@@ -1,12 +1,17 @@
 import sys
-
-from PySide6 import QtWidgets, QtGui, QtCore
-from PySide6.QtCore import Qt
-from Data.FetchData import *
 from Data.processes import *
+import threading
 icon_size = 200
 details_font_size = int(icon_size/13.333333333)
-thread = None
+
+
+def CheckIfUp(stop_button, info):
+    if not ("Up " in info.text()):
+        stop_button.setEnabled(False)
+        stop_button.setStyleSheet("color: grey")
+    else:
+        stop_button.setEnabled(True)
+
 
 class button(QtWidgets.QPushButton):
     def __init__(self, id):
@@ -14,7 +19,6 @@ class button(QtWidgets.QPushButton):
         self.id = id
         self.setFixedSize(icon_size, icon_size)
         self.setStyleSheet("background-color: #444654; border-radius: 10px")
-        print('\n', id)
         pixmap = QtGui.QPixmap(dists[id]["icon"])
         # Connect the clicked signal to a function
         self.clicked.connect(lambda: self.updateDetails(pixmap, id))
@@ -27,7 +31,7 @@ class button(QtWidgets.QPushButton):
 
     def updateDetails(self, pixmap, id):
         global button_list
-        print(f'\n\n{dists}')
+        #print(f'\n\n{dists}')
         if pixmap:
             pixmap = pixmap.scaled(icon_size+140, icon_size+140, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             image_label.setPixmap(pixmap)
@@ -37,18 +41,20 @@ class button(QtWidgets.QPushButton):
         name = dists[id]['name']
         for i in button_list:
             i.deleteLater()
-        start = QtWidgets.QPushButton("stop distro")
+        stop = QtWidgets.QPushButton("stop distro")
+        CheckIfUp(stop, info)
         open = QtWidgets.QPushButton("open in terminal")
         delete = QtWidgets.QPushButton("remove distro")
-        button_list = (open, start, delete)
+        button_list = (open, stop, delete)
 
-        start.clicked.connect(lambda: stop_distro(name))
+        stop.clicked.connect(lambda: stop_distro(name))
         open.clicked.connect(lambda: enter_distro(name))  # Pass the name parameter to the clicked signal
-        delete.clicked.connect(lambda: remove_distro(name))
+        delete.clicked.connect(lambda: remove_distro(name, id))
         for i in button_list:
             i.clicked.connect(lambda: self.update_info(id))
             details_layout.addWidget(i)
             i.setFont(QtGui.QFont("Arial", details_font_size))
+
     def update_info(self, id):
         global dists
         dists = DistroList()
@@ -56,8 +62,16 @@ class button(QtWidgets.QPushButton):
             info.setText(
                 f"Name: {dists[id]['name']}\nDistro:{dists[id]['distro']}\nStatus: {dists[id]['status']}\nID: {id}\n")
             info.setFont(QtGui.QFont("Arial", details_font_size))
+            CheckIfUp(button_list[1], info)
+
         except:
             info.setText("[Deleted]\n")
+            self.deleteLater()
+            for i in button_list:
+                i.setEnabled(False)
+                i.setStyleSheet("color: grey")
+
+
 
 class ScrollArea(QtWidgets.QScrollArea):
     def __init__(self, layout):
@@ -78,12 +92,45 @@ def clearLayout(layout):
         del item
 
 
+def create_update(self):
+    thread = create_distro()
+    try:
+        thread.join()
+    except AttributeError:
+        pass
+    UpdateGrid(self)
+
+
+def UpdateGrid(self):
+    global dists
+    dists = DistroList()
+    lst, lnum = [], 0
+    wspace = int((self.width() - 440) / icon_size)
+    r, c = 0, 0
+    clearLayout(self.left_layout)
+
+    for i in dists:  # rearranges icons
+        lst.append(button(i))
+        self.left_layout.addWidget(lst[lnum], r, c)
+        lnum += 1
+        if c < (wspace - 1):
+            c += 1
+        else:
+            r += 1
+            c = 0
+    new_butt = QtWidgets.QPushButton("+")
+    new_butt.setFixedSize(icon_size, icon_size)
+    new_butt.setStyleSheet("background-color: #444654; border-radius: 10px")
+    new_butt.setFont(QtGui.QFont("Arial", 80, QtGui.QFont.Bold))
+    new_butt.clicked.connect(lambda: create_update(self))
+    self.left_layout.addWidget(new_butt, r, c)
+
 
 class MainWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.setStyleSheet("background-color: #212121")
+        self.setStyleSheet("background-color: #212121; color: white")
         main_layout = QtWidgets.QHBoxLayout(self)
 
         # Create a label with an image
@@ -119,43 +166,25 @@ class MainWidget(QtWidgets.QWidget):
         # Set alignment of main layout to top center
         details_layout.setAlignment(Qt.AlignTop | Qt.AlignRight)
         left_container.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-        self.resizeEvent = self.onResize
+        self.resizeEvent = self.OnResize
 
-
-    def onResize(self, event):
-        lst, lnum = [], 0
-        wspace = int((self.width() - 440) / icon_size)
-        r, c = 0, 0
-        clearLayout(self.left_layout)
-
-        for i in dists:  # rearranges icons
-            lst.append(button(i))
-            self.left_layout.addWidget(lst[lnum], r, c)
-            lnum += 1
-            if c < (wspace-1):
-                c += 1
-            else:
-                r += 1
-                c = 0
-        new_butt = QtWidgets.QPushButton("+")
-        new_butt.setFixedSize(icon_size, icon_size)
-        new_butt.setStyleSheet("background-color: #444654; border-radius: 10px")
-        new_butt.setFont(QtGui.QFont("Arial", 80, QtGui.QFont.Bold))
-        new_butt.clicked.connect(lambda: print('new'))
-        self.left_layout.addWidget(new_butt, r, c)
+    def OnResize(self, event):
+        UpdateGrid(self)
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    if InitialCheck():
+        image_label = QtWidgets.QLabel()
+        info = QtWidgets.QLabel()
+        stop = QtWidgets.QPushButton("stop distro")
+        open = QtWidgets.QPushButton("open in terminal")
+        delete = QtWidgets.QPushButton("remove distro")
+        button_list = (open, stop, delete)
+        details_layout = QtWidgets.QVBoxLayout()
 
-    image_label = QtWidgets.QLabel()
-    info = QtWidgets.QLabel()
-    start = QtWidgets.QPushButton("stop distro")
-    open = QtWidgets.QPushButton("open in terminal")
-    delete = QtWidgets.QPushButton("remove distro")
-    button_list = (open, start, delete)
-    details_layout = QtWidgets.QVBoxLayout()
-
-    widget = MainWidget()
+        widget = MainWidget()
+    else:
+        widget = DistroboxNotDetectedWidget()
     widget.show()
     sys.exit(app.exec())

@@ -35,7 +35,6 @@ def DistroList():
     output = process.stdout.readline().strip()
 
     while output:
-        print(output)
         output = process.stdout.readline().strip().decode("utf-8")
         x = output.split('|')  # splits ID, NAME, STATUS and IMAGE
 
@@ -46,6 +45,3 @@ def DistroList():
             name = x[1]
             update(name, status, id, distro)  # decode("utf-8") converts bytes to string
     return dists
-
-DistroList()
-print(dists)
