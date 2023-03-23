@@ -1,13 +1,26 @@
-from PySide6.QtGui import QPalette
-from PySide6.QtWidgets import QDialog, QDialogButtonBox, QVBoxLayout, QLabel, QPushButton, QLineEdit
-from Data.FetchData import dists
-from PySide6 import QtWidgets, QtGui, QtCore
-from PySide6.QtCore import Qt
+import sys
+import threading
+try:
+    from PySide6.QtGui import QPalette, QColor
+    from PySide6.QtWidgets import QDialog, QDialogButtonBox, QVBoxLayout, QLabel, QPushButton, QLineEdit
+    from Data.FetchData import dists
+    from PySide6 import QtWidgets, QtGui, QtCore
+    from PySide6.QtCore import Qt
+except ModuleNotFoundError:
+    print("\nPySide6 Module not found\nInstall Pyside6 with 'pip install PySide6'\n")
+    sys.exit()
+app = QtWidgets.QApplication(sys.argv)
+app.setWindowIcon(QtGui.QIcon("Data/icon.ico"))
+
+def EmptyWinIcon(self):
+    self.setWindowIcon(QtGui.QIcon(''))
 
 
 class Dialog(QDialog):
     def __init__(self, text='this is a dialog', option=0, title=''):
         super().__init__()
+        self.setStyleSheet("background-color: #212121; color: white")
+        EmptyWinIcon(self)
         self.setWindowTitle(title)
         layout = QVBoxLayout()
         label = QLabel(text)
@@ -27,6 +40,8 @@ class Dialog(QDialog):
 class NewDialog(QDialog):
     def __init__(self):
         super().__init__()
+        EmptyWinIcon(self)
+        self.setStyleSheet("background-color: #212121; color: white")
         layout = QVBoxLayout()
         self.setLayout(layout)
 
@@ -64,7 +79,7 @@ class NewDialog(QDialog):
             "version": self.version_input.text(),
         }
 
-    def check(self, name = 'new_container'):
+    def check(self, name='new_container'):
         duplicate = False
         if name == '':
             name = 'new_container'
@@ -80,10 +95,11 @@ class NewDialog(QDialog):
         if not duplicate:
             self.accept()
 
+
 class DistroboxNotDetectedWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-
+        EmptyWinIcon(self)
         self.setStyleSheet("background-color: #212121; color: white")
         main_layout = QtWidgets.QVBoxLayout(self)
         main_layout.setAlignment(Qt.AlignCenter)
@@ -93,6 +109,8 @@ class DistroboxNotDetectedWidget(QtWidgets.QWidget):
                       , self)
         link.setOpenExternalLinks(True)
         link.setTextFormat(Qt.RichText)
+        palette = QPalette()
+        palette.setColor(QPalette.Link, QColor('#0083ff'))
         link.setAlignment(Qt.AlignCenter)
         button = QPushButton("OK", self)
         button.clicked.connect(self.close)

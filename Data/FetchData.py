@@ -1,9 +1,23 @@
+import sys
+try:
+    import importlib.util
+except:
+    print("cant import importlib.util")
+    sys.exit()
+
+
+# Check if required modules are available
+for module_name in ['subprocess', 'os']:
+    if importlib.util.find_spec(module_name) is None:
+        print(f"Cannot access {module_name} module")
+        sys.exit()
 import os
 import subprocess
+
 dists = dict()
 
 
-def update(name, status='Unknown', id='Unknown', distro= "unknown"):
+def update(name, status='Unknown', id='Unknown', distro="unknown"):
     if id not in dists:
         icon = icons(distro.split(':')[0].split('-')[0])
         dists[id] = {"name": name,"icon": icon, "status": status, "id": id, "distro": distro}

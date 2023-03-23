@@ -1,40 +1,24 @@
-import subprocess
-import time
-from Data.FetchData import DistroList
-import threading
+from Data.FetchData import DistroList, subprocess
 from Data.SubMenus import *
+import time
 
 
 def get_default_terminal():
-    try:
-        command = ['gnome-terminal', '-e', 'ls']
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = process.communicate()
-        if stderr:
-            raise RuntimeError(f"Command {command} failed with error message: {stderr.decode().strip()}")
-        process.terminate()
-        return 'gnome-terminal'
-
-    except:
+    terms = ['konsole']
+    for i in terms:
         try:
-            command = ['konsole', '-e', 'ls']
+            command = [i, '-e', 'ls']
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             stdout, stderr = process.communicate()
             if stderr:
                 raise RuntimeError(f"Command {command} failed with error message: {stderr.decode().strip()}")
             process.terminate()
-            return 'konsole'
+            return i
         except:
-            try:
-                command = ['xdg-terminal', '-e', 'ls']
-                process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                stdout, stderr = process.communicate()
-                if stderr:
-                    raise RuntimeError(f"Command {command} failed with error message: {stderr.decode().strip()}")
-                process.terminate()
-                return 'xdg-terminal'
-            except:
-                print("cannot find terminal\ndownload gnome shell?")
+            continue
+    print("cannot find terminal")
+    Dialog("currently supported terminals:\nKonsole").exec_()
+    sys.exit()
 
 
 terminal = get_default_terminal()
@@ -54,7 +38,7 @@ def remove_distro(name, id):
             dialog = Dialog("Please stop container new before deletion", 0, 'delete' + name)
             dialog.exec_()
         else:
-            dialog = Dialog('Delete this container?', 1, 'delete' + name)
+            dialog = Dialog('Delete this container?', 1, 'Delete' + name)
             result = dialog.exec_()
             if result == QDialog.Accepted:
                 subprocess.run(['distrobox', 'rm', name.strip()], input='y\n', text=True)

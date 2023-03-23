@@ -1,16 +1,15 @@
-import sys
 from Data.processes import *
-import threading
 icon_size = 200
 details_font_size = int(icon_size/13.333333333)
 
 
-def CheckIfUp(stop_button, info):
+def CheckIfUp(stop_button):
     if not ("Up " in info.text()):
         stop_button.setEnabled(False)
         stop_button.setStyleSheet("color: grey")
     else:
         stop_button.setEnabled(True)
+        stop_button.setStyleSheet("color: white")
 
 
 class button(QtWidgets.QPushButton):
@@ -42,7 +41,7 @@ class button(QtWidgets.QPushButton):
         for i in button_list:
             i.deleteLater()
         stop = QtWidgets.QPushButton("stop distro")
-        CheckIfUp(stop, info)
+        CheckIfUp(stop)
         open = QtWidgets.QPushButton("open in terminal")
         delete = QtWidgets.QPushButton("remove distro")
         button_list = (open, stop, delete)
@@ -62,7 +61,7 @@ class button(QtWidgets.QPushButton):
             info.setText(
                 f"Name: {dists[id]['name']}\nDistro:{dists[id]['distro']}\nStatus: {dists[id]['status']}\nID: {id}\n")
             info.setFont(QtGui.QFont("Arial", details_font_size))
-            CheckIfUp(button_list[1], info)
+            CheckIfUp(button_list[1])
 
         except:
             info.setText("[Deleted]\n")
@@ -129,6 +128,8 @@ def UpdateGrid(self):
 class MainWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+        self.setWindowTitle("Box UI")
+        EmptyWinIcon(self)
 
         self.setStyleSheet("background-color: #212121; color: white")
         main_layout = QtWidgets.QHBoxLayout(self)
@@ -173,7 +174,6 @@ class MainWidget(QtWidgets.QWidget):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
     if InitialCheck():
         image_label = QtWidgets.QLabel()
         info = QtWidgets.QLabel()
