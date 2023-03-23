@@ -49,7 +49,7 @@ def remove_distro(name, id):
 
 
 def stop_distro(name):
-    subprocess.run(['distrobox', 'stop', name.strip()], input='y\n', text=True)
+    subprocess.run(['distrobox', 'stop', name.strip()], input=b'y\n')
 
 
 def create_distro():
@@ -57,27 +57,30 @@ def create_distro():
     result = diag.exec_()
     if result:
         data = diag.get_data()
-        name = data["name"]
-        distro = data["distro"]
-        version = data["version"]
+        name = data["name"].strip()
+        distro = data["distro"].strip()
+        version = data["version"].strip()
+        print(name, distro, version)
         if name == '':
             terminal_thread = threading.Thread(
-                target=lambda: subprocess.run([terminal, '-e', 'distrobox', 'create', "new_container"]))
+                target=lambda: subprocess.run(['distrobox', 'create', "new_container"], input=b'y\n'))
         elif distro == '':
             terminal_thread = threading.Thread(
-                target=lambda: subprocess.run([terminal, '-e', 'distrobox', 'create', name.strip()]))
+                target=lambda: subprocess.run(['distrobox', 'create', name], input=b'y\n'))
         else:
             if version != '':
                 terminal_thread = threading.Thread(
                     target=lambda:
                     subprocess.run(
-                        [terminal, '-e', 'distrobox', 'create', f"--name {name.strip()}",
-                         f"--image {distro}:{version}"]))
+                        ['distrobox', 'create', '--name', f"{name}",
+                         '--image', f"{distro}:{version}"], input=b'y\n', text=True))
             else:
                 terminal_thread = threading.Thread(
                     target=lambda:
                     subprocess.run(
-                        [terminal, '-e', 'distrobox', 'create', f"--name {name.strip()}", f"--image {distro}"]))
+                        ['distrobox', 'create', '--name', f"{name.strip()}", '--image', f'{distro}'],
+                        input='y\n'))
+        Dialog('creating new container', 2)
         terminal_thread.start()
         return terminal_thread
 

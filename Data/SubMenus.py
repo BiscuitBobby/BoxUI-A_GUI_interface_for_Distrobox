@@ -30,6 +30,8 @@ class Dialog(QDialog):
             self.buttonBox = QDialogButtonBox(QBtn)
             self.buttonBox.accepted.connect(self.accept)
             self.buttonBox.rejected.connect(self.reject)
+        elif option == 2:
+            pass
         else:
             self.buttonBox = QPushButton("OK")
             self.buttonBox.clicked.connect(self.accept)

@@ -19,7 +19,7 @@ dists = dict()
 def update(name, status='Unknown', id='Unknown', distro="unknown"):
     if id not in dists:
         icon = icons(distro.split(':')[0].split('-')[0])
-        dists[id] = {"name": name,"icon": icon, "status": status, "id": id, "distro": distro}
+        dists[id] = {"name": name, "icon": icon, "status": status, "id": id, "distro": distro}
         dists[id][status] = status
         dists[id][name] = name
         dists[id][id] = id
@@ -31,14 +31,14 @@ def icons(name):
         icons_dir = os.path.join(home_dir, ".local", "share", "icons", "distrobox")
         for root, dirs, files in os.walk(icons_dir):
             for file in files:
-                if file.startswith(name):
+                if file.startswith(name.lower()):
                     distros_dir = os.path.join(root, file)
                     # print(f"Found icon at {distros_dir}")
                     return distros_dir
     except:
-        return None
+        return ''
 
-    return None
+    return ''
 
 
 def DistroList():
