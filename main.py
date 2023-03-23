@@ -18,9 +18,12 @@ class button(QtWidgets.QPushButton):
         self.id = id
         self.setFixedSize(icon_size, icon_size)
         self.setStyleSheet("background-color: #444654; border-radius: 10px")
-        pixmap = QtGui.QPixmap(dists[id]["icon"])
+        try:
+            pixmap = QtGui.QPixmap(dists[id]["icon"])
+        except TypeError:
+            pixmap = QtGui.QPixmap('')
         # Connect the clicked signal to a function
-        self.clicked.connect(lambda: self.updateDetails(pixmap, id))
+        self.clicked.connect(lambda: self.updateDetails(id, pixmap))
 
         if pixmap:
             self.setIcon(pixmap)
@@ -28,14 +31,17 @@ class button(QtWidgets.QPushButton):
         else:
             self.setText(id)
 
-    def updateDetails(self, pixmap, id):
+    def updateDetails(self, id, pixmap):
         global button_list
         #print(f'\n\n{dists}')
         if pixmap:
             pixmap = pixmap.scaled(icon_size+140, icon_size+140, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             image_label.setPixmap(pixmap)
         else:
-            image_label.setText(dists["name"])
+            try:
+                image_label.setText(dists["name"])
+            except:
+                image_label.setText("cannot retrieve image")
         self.update_info(id)
         name = dists[id]['name']
         for i in button_list:
@@ -69,6 +75,7 @@ class button(QtWidgets.QPushButton):
             for i in button_list:
                 i.setEnabled(False)
                 i.setStyleSheet("color: grey")
+                UpdateGrid(widget)
 
 
 
@@ -94,6 +101,7 @@ def clearLayout(layout):
 def create_update(self):
     thread = create_distro()
     try:
+        #crt_diag = Dialog('creating new container', 2)
         thread.join()
     except AttributeError:
         pass

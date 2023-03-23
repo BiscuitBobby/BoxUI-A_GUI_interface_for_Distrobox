@@ -32,7 +32,7 @@ class Dialog(QDialog):
             self.buttonBox.accepted.connect(self.accept)
             self.buttonBox.rejected.connect(self.reject)
         elif option == 2:
-            pass
+            self.buttonBox = QLabel('')
         else:
             self.buttonBox = QPushButton("OK")
             self.buttonBox.clicked.connect(self.accept)
@@ -43,6 +43,17 @@ class Dialog(QDialog):
 class NewDialog(QDialog):
     def __init__(self):
         super().__init__()
+        dictionary_of_distros = {'almalinux': ['8', '8-minimal', '9', '9-minimal'],
+                                 'alpine': ['3.15', '3.16', 'latest'],
+                                 'archlinux': [''],
+                                 'centos': ['7', '8', '9'],
+                                 'debian': ['7', '8', '9', '10', '11', 'stable', 'stable-backports','testing', 'testing-backports', 'unstable'],
+                                 'fedora': ['36', '37', '38', 'rawhide'],
+                                 'kali-rolling': ['latest'],
+                                 'leap': ['latest'],
+                                 'tumbleweed': ['latest'],
+                                 'ubuntu': ['14.04', '16.04', '18.04', '20.04', '22.04', '22.10']
+                                 }
         EmptyWinIcon(self)
         self.setStyleSheet("background-color: #212121; color: white")
         layout = QVBoxLayout()
@@ -60,13 +71,19 @@ class NewDialog(QDialog):
         # Add second text input field
         distro = QLabel("distro(optional):")
         layout.addWidget(distro)
-        self.distro_input = QLineEdit()
+        self.distro_input = QtWidgets.QComboBox(self)
+        self.distro_input.addItems(dictionary_of_distros.keys())
         layout.addWidget(self.distro_input)
 
         # Add third text input field
         version = QLabel("version(optional):")
         layout.addWidget(version)
-        self.version_input = QLineEdit()
+        self.version_input = QtWidgets.QComboBox(self)
+        self.version_input.addItems(dictionary_of_distros[self.distro_input.currentText()])
+        self.distro_input.currentIndexChanged.connect(
+            lambda: self.version_input.clear() or self.version_input.addItems(dictionary_of_distros[self.distro_input.currentText()])
+        )
+
         layout.addWidget(self.version_input)
 
         # Add OK and Cancel buttons
@@ -78,8 +95,8 @@ class NewDialog(QDialog):
     def get_data(self):
         return {
             "name": self.name_input.text(),
-            "distro": self.distro_input.text(),
-            "version": self.version_input.text(),
+            "distro": self.distro_input.currentText(),
+            "version": self.version_input.currentText(),
         }
 
     def check(self, name='new_container'):

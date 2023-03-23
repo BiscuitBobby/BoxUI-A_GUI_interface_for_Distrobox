@@ -80,7 +80,6 @@ def create_distro():
                     subprocess.run(
                         ['distrobox', 'create', '--name', f"{name.strip()}", '--image', f'{distro}'],
                         input=b'y\n'))
-        Dialog('creating new container', 2)
         terminal_thread.start()
         return terminal_thread
 
