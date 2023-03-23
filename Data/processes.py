@@ -73,13 +73,13 @@ def create_distro():
                     target=lambda:
                     subprocess.run(
                         ['distrobox', 'create', '--name', f"{name}",
-                         '--image', f"{distro}:{version}"], input=b'y\n', text=True))
+                         '--image', f"{distro}:{version}"], input='y\n', text=True))
             else:
                 terminal_thread = threading.Thread(
                     target=lambda:
                     subprocess.run(
                         ['distrobox', 'create', '--name', f"{name.strip()}", '--image', f'{distro}'],
-                        input='y\n'))
+                        input=b'y\n'))
         Dialog('creating new container', 2)
         terminal_thread.start()
         return terminal_thread

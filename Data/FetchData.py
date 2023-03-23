@@ -38,8 +38,6 @@ def icons(name):
     except:
         return ''
 
-    return ''
-
 
 def DistroList():
     global dists

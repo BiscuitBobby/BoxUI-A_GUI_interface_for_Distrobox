@@ -12,6 +12,7 @@ except ModuleNotFoundError:
 app = QtWidgets.QApplication(sys.argv)
 app.setWindowIcon(QtGui.QIcon("Data/icon.ico"))
 
+
 def EmptyWinIcon(self):
     self.setWindowIcon(QtGui.QIcon(''))
 
