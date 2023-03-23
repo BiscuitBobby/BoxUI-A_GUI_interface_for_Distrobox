@@ -150,7 +150,6 @@ class MainWidget(QtWidgets.QWidget):
         right_layout.setStyleSheet("background-color: #444654")
         right_layout.setLayout(details_layout)
         right_layout.setMaximumWidth(icon_size+160)
-
         details_layout.addWidget(image_label)
         details_layout.addWidget(info)
 

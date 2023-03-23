@@ -22,7 +22,6 @@ def get_default_terminal():
 
 
 terminal = get_default_terminal()
-#print('\n', terminal)
 
 
 def enter_distro(name):

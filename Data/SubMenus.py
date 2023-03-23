@@ -117,4 +117,3 @@ class DistroboxNotDetectedWidget(QtWidgets.QWidget):
         main_layout.addWidget(label)
         main_layout.addWidget(link)
         main_layout.addWidget(button)
-
