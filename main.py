@@ -164,7 +164,7 @@ class MainWidget(QtWidgets.QWidget):
         self.left_layout = QtWidgets.QGridLayout()
         left_container = ScrollArea(self.left_layout)
         self.setMinimumSize(462+icon_size, icon_size+412)
-        self.resize(1210, 600)
+        self.resize(1240, self.height())
 
         # Adding the layouts to main layout
         main_layout.addWidget(left_container)
