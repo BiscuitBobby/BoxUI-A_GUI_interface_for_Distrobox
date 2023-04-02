@@ -22,6 +22,8 @@ class button(QtWidgets.QPushButton):
             pixmap = QtGui.QPixmap(dists[id]["icon"])
         except TypeError:
             pixmap = QtGui.QPixmap('')
+        except:
+            print('error making button pixmap')
         # Connect the clicked signal to a function
         self.clicked.connect(lambda: self.updateDetails(id, pixmap))
 

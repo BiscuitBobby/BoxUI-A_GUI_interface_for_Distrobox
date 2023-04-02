@@ -89,3 +89,5 @@ def InitialCheck():
         return 1
     except FileNotFoundError:
         return 0
+    except:
+        print("error at InitialCheck")
