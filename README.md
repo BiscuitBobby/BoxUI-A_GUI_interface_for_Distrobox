@@ -34,6 +34,12 @@ There you fill find the executable file 'main'
 ![ss](https://user-images.githubusercontent.com/87699062/227241222-09f4b8ed-bc21-451c-bae8-53e4c1761d5b.png)
 ![image](https://user-images.githubusercontent.com/87699062/229911449-a279306e-9cf2-4a60-8642-973e29d9949c.png)
 
+## basic features:
+-Can create new distribution containers
+
+-Start and stop distro containers
+
+-Delete existing containers
 ## General Info:
 -Easily resizable without usability issues
 
