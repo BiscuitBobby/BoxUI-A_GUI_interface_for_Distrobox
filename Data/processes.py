@@ -4,10 +4,11 @@ import time
 
 
 def get_default_terminal():
-    terms = ['konsole']
+    terms = {'konsole': ['konsole', '-e', 'ls'],
+             'gnome-terminal': ["gnome-terminal", "--", 'ls']}  # terminals
     for i in terms:
         try:
-            command = [i, '-e', 'ls']
+            command = terms[i]
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             stdout, stderr = process.communicate()
             if stderr:
@@ -25,7 +26,12 @@ terminal = get_default_terminal()
 
 
 def enter_distro(name):
-    terminal_thread = threading.Thread(target=lambda: subprocess.run([terminal, '-e', 'distrobox', 'enter', name.strip()]))
+    name = name.strip()
+
+    command = {'konsole': ['konsole', '-e', 'distrobox', 'enter', name],
+               'gnome-terminal': ["gnome-terminal", "--", 'distrobox', 'enter', name]}
+
+    terminal_thread = threading.Thread(target=lambda: subprocess.Popen(command[terminal]))
     terminal_thread.start()
     time.sleep(1)
 
@@ -80,6 +86,8 @@ def create_distro():
                     subprocess.run(
                         ['distrobox', 'create', '--name', f"{name.strip()}", '--image', f'{distro}'],
                         input=b'y\n'))
+        dialog = Dialog("creating new container", 2, 'new container' + name)
+        dialog.exec_()
         terminal_thread.start()
         return terminal_thread
 
