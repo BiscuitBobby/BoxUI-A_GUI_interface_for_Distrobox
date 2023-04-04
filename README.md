@@ -31,7 +31,7 @@ Run the executable file:
 
 -glibc-2.33
 
-Any other dependecy will be packaged with the application
+Any other dependencies will be packaged with the application.
 
 ![ss](https://user-images.githubusercontent.com/87699062/227241222-09f4b8ed-bc21-451c-bae8-53e4c1761d5b.png)
 ![image](https://user-images.githubusercontent.com/87699062/229911449-a279306e-9cf2-4a60-8642-973e29d9949c.png)
