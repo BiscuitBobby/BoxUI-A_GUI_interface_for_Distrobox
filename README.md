@@ -59,4 +59,4 @@ Any other dependencies will be packaged with the application.
 
 -While initializing a new container, it may sometimes look stuck, but closing and reopening the application fixes the issue.
 
-![image](https://user-images.githubusercontent.com/87699062/229923244-8fe33168-7cdf-47be-8f42-bc9da530efe7.png)
+![image](https://user-images.githubusercontent.com/87699062/229925138-fe76828a-f1c7-4981-96ab-bbcd82e89193.png)
