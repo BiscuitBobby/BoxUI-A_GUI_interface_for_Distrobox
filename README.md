@@ -29,7 +29,7 @@ Run the executable file:
 
 -Podman or Docker
 
--glibc-2.33
+-zlib
 
 Other dependencies will generally be packaged with the application.
 
