@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="62586bae-32eb-46f5-a419-c89b7077800d" name="Changes" comment="packaged with cx_Freeze" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2N6VXnOZUL5F3L5xS2NSylcRMci" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/user/PycharmProjects/distrobox_gui&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Data" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="FetchData" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="distrobox_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Data" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Data/FetchData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="jc" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="distrobox_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/jc.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="distrobox_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="svd" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="distrobox_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/svd.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.jc" />
+        <item itemvalue="Python.svd" />
+        <item itemvalue="Python.FetchData" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="62586bae-32eb-46f5-a419-c89b7077800d" name="Changes" comment="" />
+      <created>1678984561118</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678984561118</updated>
+      <workItem from="1678984562437" duration="6381000" />
+      <workItem from="1678993197823" duration="21000" />
+      <workItem from="1679037829816" duration="9583000" />
+      <workItem from="1679123698995" duration="3339000" />
+      <workItem from="1679135324997" duration="5813000" />
+      <workItem from="1679143306393" duration="45000" />
+      <workItem from="1679196053284" duration="7597000" />
+      <workItem from="1679230811396" duration="8416000" />
+      <workItem from="1679253305131" duration="11684000" />
+      <workItem from="1679302441943" duration="14413000" />
+      <workItem from="1679324709599" duration="517000" />
+      <workItem from="1679325299277" duration="93000" />
+      <workItem from="1679343524854" duration="747000" />
+      <workItem from="1679390689619" duration="5702000" />
+      <workItem from="1679397589437" duration="2830000" />
+      <workItem from="1679400754076" duration="13259000" />
+      <workItem from="1679478467189" duration="15000" />
+      <workItem from="1679494335932" duration="6544000" />
+      <workItem from="1679505690611" duration="1393000" />
+      <workItem from="1679507849681" duration="671000" />
+      <workItem from="1679565146937" duration="9831000" />
+      <workItem from="1679581142125" duration="324000" />
+      <workItem from="1679581536914" duration="841000" />
+      <workItem from="1679583238377" duration="275000" />
+      <workItem from="1679583961303" duration="10161000" />
+      <workItem from="1679662380001" duration="294000" />
+      <workItem from="1679662806377" duration="94000" />
+      <workItem from="1679663047904" duration="53000" />
+      <workItem from="1679663230601" duration="250000" />
+      <workItem from="1679663550405" duration="181000" />
+      <workItem from="1679680614478" duration="21000" />
+      <workItem from="1679680831196" duration="15000" />
+      <workItem from="1679684732381" duration="819000" />
+      <workItem from="1679685730197" duration="122000" />
+      <workItem from="1679758489474" duration="167000" />
+      <workItem from="1679765537272" duration="174000" />
+      <workItem from="1679765740377" duration="35000" />
+      <workItem from="1679765872360" duration="9000" />
+      <workItem from="1679767779859" duration="1000" />
+      <workItem from="1679773846403" duration="18000" />
+      <workItem from="1679853911821" duration="230000" />
+      <workItem from="1679855499362" duration="1000" />
+      <workItem from="1679856507004" duration="3000" />
+      <workItem from="1679859044469" duration="10000" />
+      <workItem from="1679862058570" duration="593000" />
+      <workItem from="1680151067684" duration="816000" />
+      <workItem from="1680186547169" duration="2000" />
+      <workItem from="1680192558810" duration="224000" />
+      <workItem from="1680241920778" duration="2000" />
+      <workItem from="1680264952298" duration="121000" />
+      <workItem from="1680265919794" duration="60000" />
+      <workItem from="1680366395093" duration="248000" />
+      <workItem from="1680404815544" duration="49000" />
+      <workItem from="1680440414828" duration="12000" />
+      <workItem from="1680609948312" duration="103000" />
+      <workItem from="1680610196713" duration="3485000" />
+      <workItem from="1680614154384" duration="7370000" />
+      <workItem from="1680626464332" duration="820000" />
+      <workItem from="1680672320457" duration="1424000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1678992127846</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678992127846</updated>
+    </task>
+    <task id="LOCAL-00002" summary="corrected alignment of left layout">
+      <created>1678993122770</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678993122770</updated>
+    </task>
+    <task id="LOCAL-00003" summary="buttons realign automatically, have to add scroll and align to left">
+      <created>1679141130358</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679141130358</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ui update">
+      <created>1679200549330</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679200549330</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ui update">
+      <created>1679239431613</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679239431613</updated>
+    </task>
+    <task id="LOCAL-00006" summary="can delete and enter distrobox via terminal">
+      <created>1679263105861</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679263105861</updated>
+    </task>
+    <task id="LOCAL-00007" summary="need to add new container function and fix start/stop button bug">
+      <created>1679263986873</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679263986873</updated>
+    </task>
+    <task id="LOCAL-00008" summary="bugfix, need to implement add new distro feature">
+      <created>1679322360885</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679322360885</updated>
+    </task>
+    <task id="LOCAL-00009" summary="it's not a bug, its feature">
+      <created>1679324723124</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679324723124</updated>
+    </task>
+    <task id="LOCAL-00010" summary="will create a better menu to make new container">
+      <created>1679414859517</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679414859517</updated>
+    </task>
+    <task id="LOCAL-00011" summary="update">
+      <created>1679574837032</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679574837033</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update">
+      <created>1679574957592</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1679574957592</updated>
+    </task>
+    <task id="LOCAL-00013" summary="update">
+      <created>1679597371551</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1679597371551</updated>
+    </task>
+    <task id="LOCAL-00014" summary="update">
+      <created>1679597488258</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1679597488258</updated>
+    </task>
+    <task id="LOCAL-00015" summary="update">
+      <created>1679602545771</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1679602545771</updated>
+    </task>
+    <task id="LOCAL-00016" summary="why does it only run on my ide">
+      <created>1679663092717</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1679663092717</updated>
+    </task>
+    <task id="LOCAL-00017" summary="packaged with cx_Freeze">
+      <created>1680624466173</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1680624466173</updated>
+    </task>
+    <task id="LOCAL-00018" summary="packaged with cx_Freeze">
+      <created>1680624496933</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1680624496933</updated>
+    </task>
+    <task id="LOCAL-00019" summary="packaged with cx_Freeze">
+      <created>1680624529955</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1680624529955</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="corrected alignment of left layout" />
+    <MESSAGE value="buttons realign automatically, have to add scroll and align to left" />
+    <MESSAGE value="ui update" />
+    <MESSAGE value="can delete and enter distrobox via terminal" />
+    <MESSAGE value="need to add new container function and fix start/stop button bug" />
+    <MESSAGE value="bugfix, need to implement add new distro feature" />
+    <MESSAGE value="it's not a bug, its feature" />
+    <MESSAGE value="will create a better menu to make new container" />
+    <MESSAGE value="update" />
+    <MESSAGE value="why does it only run on my ide" />
+    <MESSAGE value="packaged" />
+    <MESSAGE value="packaged with cx_Freeze" />
+    <option name="LAST_COMMIT_MESSAGE" value="packaged with cx_Freeze" />
+  </component>
+</project>
