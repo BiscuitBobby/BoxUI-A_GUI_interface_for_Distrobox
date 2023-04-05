@@ -46,7 +46,7 @@ Other dependencies will generally be packaged with the application.
 ## General Info:
 -Easily resizable without usability issues
 
--Tested on window managers and different desktop environment
+-Tested on i3, Sway, Gnome and KDE plasme
 
 -This app has only been tested extensively with Konsole and Fedora
 
