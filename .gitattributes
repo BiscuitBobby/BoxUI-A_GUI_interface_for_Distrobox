@@ -1,0 +1,5 @@
+*.6 filter=lfs diff=lfs merge=lfs -text
+*.so filter=lfs diff=lfs merge=lfs -text
+*.pak filter=lfs diff=lfs merge=lfs -text
+lupdate filter=lfs diff=lfs merge=lfs -text
+*.56 filter=lfs diff=lfs merge=lfs -text
