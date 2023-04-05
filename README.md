@@ -16,7 +16,7 @@ Clone the repository:
 
 Navigate to the build folder:
 
-```cd build/exe.linux-x86_64-3.11```
+```cd exe.linux-x86_64-3.11```
 
 Run the executable file:
 
