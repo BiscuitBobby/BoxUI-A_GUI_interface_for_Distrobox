@@ -20,16 +20,18 @@ Navigate to the build folder:
 
 Run the executable file:
 
+```chmod +x main```
+
 ```./main```
 
 ## Note that Box-UI requires the following dependencies:
--Distrobox
+- Distrobox
 
--Gnome-terminal or Konsole
+- Gnome-terminal or Konsole
 
--Podman or Docker
+- Podman or Docker
 
--zlib
+- zlib
 
 Other dependencies will generally be packaged with the application.
 
@@ -38,25 +40,25 @@ Other dependencies will generally be packaged with the application.
 
 ## basic features:
 ### Box-UI provides the following basic features:
--Creating new distribution containers
+- Creating new distribution containers
 
--Starting and stopping distro containers
+- Starting and stopping distro containers
 
--Deleting existing containers
+- Deleting existing containers
 ## General Info:
--Easily resizable without usability issues
+- Easily resizable without usability issues
 
--Tested on i3, Sway, Gnome and KDE plasme
+- Tested on i3, Sway, Gnome and KDE plasme
 
--This app has only been tested extensively with Konsole and Fedora
+- This app has only been tested extensively with Konsole and Fedora
 
 -**Note that Box-UI is not affiliated with Distrobox in any way**
 
 ## Known issues:
--It may hang while downloading container data when creating a new distro container for the first time.
+- It may hang while downloading container data when creating a new distro container for the first time.
 
--Creation of an OpenSuse-leap container does not work so the user will have to refer to the distrobox documentation to create it manually
+- Creation of an OpenSuse-leap container does not work so the user will have to refer to the distrobox documentation to create it manually
 
--While initializing a new container, it may sometimes look stuck, but closing and reopening the application fixes the issue.
+- While initializing a new container, it may sometimes look stuck, but closing and reopening the application fixes the issue.
 
 ![image](https://user-images.githubusercontent.com/87699062/229925138-fe76828a-f1c7-4981-96ab-bbcd82e89193.png)
